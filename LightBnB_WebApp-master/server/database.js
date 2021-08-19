@@ -167,10 +167,36 @@ exports.getAllProperties = getAllProperties;
  * @return {Promise<{}>} A promise to the property.
  */
 const addProperty = function(property) {
-  const propertyId = Object.keys(properties).length + 1;
-  property.id = propertyId;
-  properties[propertyId] = property;
-  return Promise.resolve(property);
+  console.log(property)
+  const owner_id = property.owner_id;
+  const title = property.title;
+  let description = property.description;
+  if (!description) {
+    description = '';
+  }
+  const thumbnail_photo_url = property.thumbnail_photo_url;
+  const cover_photo_url = property.cover_photo_url;
+  const street = property.street;
+  const city = property.city;
+  const province = property.province;
+  const post_code = property.post_code;
+  const country = property.country;
+  const parking_spaces = Number(property.parking_spaces);
+  const number_of_bathrooms = Number(property.number_of_bathrooms);
+  const number_of_bedrooms= Number(property.number_of_bedrooms);
+  const cost_per_night = Number(property.cost_per_night);
+
+  return pool
+    .query(`
+      INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, parking_spaces, number_of_bathrooms, number_of_bedrooms, country, street, city, province, post_code)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+      RETURNING *
+      `, [owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, parking_spaces, number_of_bathrooms, number_of_bedrooms, country, street, city, province, post_code])
+    .then((result) => {
+      console.log(result.rows)
+      return result.rows
+      })
+    .catch((err) => err.message);
 }
 
 
