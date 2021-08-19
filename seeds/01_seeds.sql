@@ -21,7 +21,7 @@ VALUES (1, 'Russia Retreat', 'Where I hide from the KGB, with guests!', 'https:/
 (4, 'Money Honey', 'You got money, I want that money.', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2Ftrixiemattel%2Fstatus%2F1256671727519592448&psig=AOvVaw0REAYX4aiHoi4X9IOzfdZa&ust=1629410856052000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKDo19HKu_ICFQAAAAAdAAAAABAJ', 'https://pbs.twimg.com/media/DupkCYEU0AACOpA.jpg', 5000, 6, 2, 4, 'Cambodia', 'Stung Ta Ngoun', 'Krong Poi Pet', 'Western Cambodia', '0', TRUE),
 (4, 'Friend House', 'For "Friends"', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2Ftrixiemattel%2Fstatus%2F1397983693881286665&psig=AOvVaw1yEZ1hPJaFnSTj4gdBBmxX&ust=1629410689180000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOCL1ILKu_ICFQAAAAAdAAAAABAI', 'https://i.pinimg.com/originals/83/61/42/836142faea1d276233b4fa84f4d0e27f.jpg', 500, 0, 2, 1, 'Singapore', 'Yishun Street 41', 'Singapore', 'Yishan', '760455', FALSE);
 
-INSERT INTO reservations (start_date, end_date, user_id, property_id)
+INSERT INTO reservations (start_date, end_date, guest_id, property_id)
 VALUES ('2018-02-12T08:06:00.000Z', '2018-02-12T08:14:30.000Z',15, 3),
 ('2018-02-12T08:06:00.000Z', '2018-02-12T08:14:30.000Z',16, 3),
 ('2018-02-12T08:06:00.000Z', '2018-02-12T08:14:30.000Z',3, 2),
@@ -32,7 +32,7 @@ VALUES ('2018-02-12T08:06:00.000Z', '2018-02-12T08:14:30.000Z',15, 3),
 ('2018-02-12T08:06:00.000Z', '2018-02-12T08:14:30.000Z',5, 1),
 ('2018-02-12T08:06:00.000Z', '2018-02-12T08:14:30.000Z',11, 1);
 
-INSERT INTO property_reviews (user_id, property_id, reservation_id, rating, message)
+INSERT INTO property_reviews (guest_id, property_id, reservation_id, rating, message)
 VALUES (3, 2, 3, 2, 'Fine until the mice'),
 (10, 2, 5, 1, 'Fed me mice'),
 (15, 3, 1, 3, 'Personally could have had a better time at a club'),
