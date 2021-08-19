@@ -102,7 +102,7 @@ exports.getAllReservations = getAllReservations;
  */
 const getAllProperties = (options, limit = 10) => {
   const queryParams = [];
-  let queryString = `SELECT properties.*, AVG(rating) as rating, cost_per_night
+  let queryString = `SELECT properties.*, AVG(rating) as average_rating, cost_per_night
   FROM properties
   JOIN property_reviews ON property_id = properties.id
   `;
@@ -114,14 +114,8 @@ const getAllProperties = (options, limit = 10) => {
     }
   }
   if (options.owner_id) {
-    if (!options.city) {
-      queryString += `WHERE `;
-    }
     queryParams.push(options.owner_id);
-    queryString += `owner_id = $${queryParams.length} `;
-    if (options.minimum_price_per_night) {
-      queryString += ` AND `;
-    }
+    queryString += `WHERE owner_id = $${queryParams.length} `;
   }
   if (options.minimum_price_per_night) {
     if (!options.city || !options.owner_id) {
@@ -155,7 +149,8 @@ const getAllProperties = (options, limit = 10) => {
   
   return pool
     .query(queryString, queryParams)
-    .then((result) => result.rows)
+    .then((result) => {
+      return result.rows})
     .catch((err) => err.message);
 };
 exports.getAllProperties = getAllProperties;
@@ -167,7 +162,6 @@ exports.getAllProperties = getAllProperties;
  * @return {Promise<{}>} A promise to the property.
  */
 const addProperty = function(property) {
-  console.log(property)
   const owner_id = property.owner_id;
   const title = property.title;
   let description = property.description;
